@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head> 
+	<title>Game Bar</title>
+	<meta charset="UTF-8">
+    <meta name="description" content="Only for fun">
+    <meta name="keywords" content="Hello, Ngân">
+    <meta name="author" content="Jackson Bui">
+    <meta httv-equiv="refresh" content="30">   
+    <meta name="viewport" content="width=device-width">
+<style>
+body {
+	 background: #0f1923;
+	 font-family: "Muli";
+}
+ div.gbar {
+	 display:flex;
+	 height: 100vh;
+	 align-items: center;
+	 justify-content: center;
+	 flex-flow:column;
+}
+ div a { /*border around the base*/
+	 width: 100%;
+	 max-width: 240px;
+	 height: 54px;
+	 padding: 8px;
+	 font-size: 0.8rem;
+	 font-weight: 900;
+	 color: deepskyblue;
+	 text-align: center;
+	 text-transform: uppercase;
+	 text-decoration: none;
+	 box-shadow: 0 0 0 1px inset mediumblue;
+	 position: relative;
+	 margin:10px 0;
+}
+ div a.white:hover > p { /*second bar(change color when being hovered)*/
+	 color: #ece8e1; 
+}
+ div a.white > p { /*second bar (set bg color and font's color)*/
+	 background: #ece8e1;
+	 color: #0f1923;
+}
+ div a.white > p span.base { /*second bar(border of the base is vanished)*/
+	 border: 1px solid transparent; 
+}
+ div a.transparent:hover > p { /*third bar(show that color when being hovered )*/
+	 color: #ece8e1;
+}
+ div a.transparent > p { /*third bar(set bg color and font's color)*/
+	 background: #0f1923;
+	 color: #ece8e1;
+}
+ div a.transparent > p span.base { /*third bar(set the color for the border of the base)*/
+	 border: 1px solid #ece8e1;
+}
+div a:after, div a:before {  /*every bar (blank pieces in the border-left and border-right)*/
+	 content: "";
+	 width: 1px; /*missing 1px width in the border-left and border-right*/
+	 position: absolute;
+	 height: 8px; /*missing 8px height in the border-left and border-right*/
+	 background: blueviolet;  /*set the color for the missing pieces*/
+	 left: 0;
+	 top: 50%; /*set the position for the missing pieces*/ 
+	 transform: translateY(-50%);
+}
+ div a:before {  /*set the missing piece in the border-right*/
+	 right: 0;
+	 left: initial;
+}
+ div a p {  /*every base(setup the content and border for the base)*/
+	 margin: 0;
+	 height: 54px; /*border-height of base*/
+	 line-height: 54px; /*words inside*/
+	 box-sizing: border-box;
+	 z-index:1;
+	 left: 0;
+	 width: 100%;
+	 position: relative;
+	 overflow: hidden;
+}
+ div a p span.base { /*set the border of the first base*/
+	 box-sizing: border-box;
+	 position: absolute;
+	 z-index: 2;
+	 width: 100%;
+	 height: 100%;
+	 left: 0;
+	 border: 1px solid deepskyblue ;
+}
+ div a p span.base:before { /*make a small black square in the top left*/
+	 content: "";
+	 width: 6px; 
+	 height: 6px;
+	 left: -1px;
+	 top: -1px;
+	 background: blueviolet;
+	 position: absolute;
+	 transition: 0.3s ease-out all;
+}
+ div a p span.bg { /*flowing deepskyblue color from left to right*/
+	 left: -5%;
+	 position: absolute;
+	 background: deepskyblue;
+	 width: 0;
+	 height: 100%;
+	 z-index: 3;
+	 transition: 0.5s ease-out all; /*speed of the color's flow*/
+	 transform: skewX(-10deg); /*the degree of the flow*/
+}
+div a p span.text { /*in order to show content inside the base after the color's flow passed by*/
+	 z-index: 4;
+	 width: 100%;
+	 height: 100%;
+	 position: absolute;
+	 left: 0;
+	 top: 0;
+}
+ div a p span.text:after { /*make a small black square in the bottom right*/
+	 content: "";
+	 width: 8px;
+	 height: 8px;
+	 right: 0;
+	 bottom: 0;
+	 background: #0f1923;
+	 position: absolute;
+	 transition: 0.3s ease-out all;
+	 z-index: 5;
+}
+ div a:hover { /*show the font's color of 3 bars when being hovered*/
+	 color: #ece8e1; 
+}
+div a:hover span.bg {/*make the color's flow activate*/
+	 width: 110%;
+}
+ div a:hover span.text:after { /*set a color white for small square after being hovered*/
+	 background: #ece8e1;
+}
+ 
+</style>
+</head>
+<body>
+    <div class="gbar">
+        <a href="#">
+            <p><span class="bg"></span><span class="base"></span><span class="text">New Game</span></p>
+        </a>
+        <a class="white" href="#">
+            <p><span class="bg"></span><span class="base"></span><span class="text">Save</span></p>
+        </a>
+        <a class="transparent" href="#">
+            <p><span class="bg"></span><span class="base"></span><span class="text">Setting</span></p>
+        </a>
+    </div>    
+</body>
+</html>
